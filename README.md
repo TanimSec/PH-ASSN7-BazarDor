@@ -5,7 +5,7 @@
 ---
 
 ## 🌐 Live & Repository Links
-- **Live Deployment Link:** [https://ph-assn7-bazardor.vercel.app](https://ph-assn7-bazardor.vercel.app) *(or your deployed URL)*
+- **Live Deployment Link:** [https://ph-assn-7-bazar-dor.vercel.app](https://ph-assn-7-bazar-dor.vercel.app)
 - **GitHub Repository Link:** [https://github.com/TanimSec/PH-ASSN7-BazarDor](https://github.com/TanimSec/PH-ASSN7-BazarDor)
 
 ---
