@@ -1,5 +1,7 @@
 import { betterAuth } from "better-auth";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { memoryAdapter } from "better-auth/adapters/memory";
+import { db } from "./mongodb";
 
 type MemoryDbSchema = Record<string, Record<string, unknown>[]>;
 
@@ -23,9 +25,12 @@ const getBaseUrl = () => {
   return "http://localhost:3000";
 };
 
+// Use official BetterAuth MongoDB adapter when MONGODB_URI is provided, fallback to memory
+const databaseAdapter = db ? mongodbAdapter(db) : memoryAdapter(memoryDb);
+
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET || "bazardor-super-secret-auth-key-2026",
-  database: memoryAdapter(memoryDb),
+  database: databaseAdapter,
   baseURL: getBaseUrl(),
   trustedOrigins: [
     "http://localhost:3000",
