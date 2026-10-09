@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import React, { Suspense } from "react";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/auth-context";
@@ -45,7 +46,9 @@ export default function RootLayout({
               },
             }}
           />
-          <Navbar />
+          <React.Suspense fallback={<div className="w-full h-24 bg-white border-b border-[#e2e8e2]" />}>
+            <Navbar />
+          </React.Suspense>
           <main className="flex-1">{children}</main>
           <Footer />
         </AuthProvider>
