@@ -1,10 +1,31 @@
 import { betterAuth } from "better-auth";
 import { memoryAdapter } from "better-auth/adapters/memory";
 
+type MemoryDbSchema = Record<string, Record<string, unknown>[]>;
+
+const globalForAuth = globalThis as unknown as {
+  memoryDb?: MemoryDbSchema;
+};
+
+export const memoryDb: MemoryDbSchema =
+  globalForAuth.memoryDb ||
+  (globalForAuth.memoryDb = {
+    user: [],
+    session: [],
+    account: [],
+    verification: [],
+  });
+
 export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET || "bazardor-super-secret-auth-key-2026",
-  database: memoryAdapter({}),
+  database: memoryAdapter(memoryDb),
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  trustedOrigins: [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    process.env.NEXT_PUBLIC_APP_URL || "",
+  ].filter(Boolean),
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
