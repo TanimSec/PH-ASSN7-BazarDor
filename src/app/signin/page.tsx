@@ -43,7 +43,7 @@ function SignInForm() {
     if (success) {
       router.push(redirectUrl);
     } else {
-      const msg = "ইমেইল বা পাসওয়ার্ড সঠিক নয়। পুনরায় চেষ্টা করুন।";
+      const msg = "ইমেইল বা পাসওয়ার্ড সঠিক নয়। আপনি নতুন ব্যবহারকারী হলে অনুগ্রহ করে প্রথমে সাইন আপ করুন।";
       setFormError(msg);
     }
   };

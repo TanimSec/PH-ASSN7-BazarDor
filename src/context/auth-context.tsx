@@ -63,11 +63,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
+    const cleanEmail = email.trim().toLowerCase();
 
     // 1. Try BetterAuth server
     try {
       const res = await authClient.signIn.email({
-        email: email.trim(),
+        email: cleanEmail,
         password,
       });
 
@@ -85,17 +86,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return true;
       }
     } catch {
-      // Serverless cold-start or network fallback
+      // Serverless cold-start or offline check
     }
 
-    // 2. Check locally registered accounts cache (for Vercel serverless cold starts)
+    // 2. Check registered accounts cache
     try {
       const accountsJson = localStorage.getItem(LOCAL_STORAGE_ACCOUNTS_KEY);
       if (accountsJson) {
         const accounts: Array<{ name: string; email: string; password?: string }> = JSON.parse(accountsJson);
-        const matched = accounts.find((a) => a.email.toLowerCase() === email.trim().toLowerCase());
+        const matched = accounts.find((a) => a.email.toLowerCase() === cleanEmail);
         if (matched) {
-          if (!matched.password || matched.password === password) {
+          if (matched.password === password) {
             const u: User = {
               id: "usr-" + Date.now(),
               name: matched.name,
@@ -117,21 +118,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // continue
     }
 
-    // 3. Fallback seamless login for valid credentials
-    if (password.length >= 6) {
-      const fallbackUser: User = {
-        id: "usr-" + Date.now(),
-        name: email.split("@")[0] || "ব্যবহারকারী",
-        email: email.trim(),
-      };
-      setUser(fallbackUser);
-      localStorage.setItem(LOCAL_STORAGE_USER_KEY, JSON.stringify(fallbackUser));
-      toast.success("সফলভাবে সাইন ইন হয়েছে!");
-      setIsLoading(false);
-      return true;
-    }
-
-    toast.error("ইমেইল বা পাসওয়ার্ড ভুল হয়েছে");
+    // 3. Not registered -> strictly reject
+    toast.error("অ্যাকাউন্টটি পাওয়া যায়নি। অনুগ্রহ করে প্রথমে সাইন আপ করুন।");
     setIsLoading(false);
     return false;
   };
