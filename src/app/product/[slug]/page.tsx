@@ -50,7 +50,7 @@ export default function ProductDetailsPage({ params }: ProductDetailsPageProps) 
     }
   }, [slug]);
 
-  if (isAuthLoading || (isLoading && !product)) {
+  if (isAuthLoading || !user || (isLoading && !product)) {
     return (
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-6">
         <div className="h-4 w-40 bg-gray-200 rounded animate-pulse" />
