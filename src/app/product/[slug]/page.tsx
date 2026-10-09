@@ -168,7 +168,7 @@ export default function ProductDetailsPage({ params }: ProductDetailsPageProps) 
         </div>
 
         {/* Current Price & Change Badge */}
-        <div className="bg-[#fafcfa] border border-[#e2e8e2] rounded-xl p-4 sm:min-w-[200px] flex md:flex-col items-center justify-between md:items-end gap-2">
+        <div className="bg-[#fafcfa] border border-[#e2e8e2] rounded-xl p-4 sm:min-w-50 flex md:flex-col items-center justify-between md:items-end gap-2">
           <div>
             <span className="text-xs text-gray-400 block md:text-right font-medium">আজকের জাতীয় গড় দর</span>
             <div className="text-2xl sm:text-3xl font-black text-[#1d271f] md:text-right">

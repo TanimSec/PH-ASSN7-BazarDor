@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-import { User, Mail, ShieldCheck, Edit3, LogOut, ArrowLeft } from "lucide-react";
+import { Mail, ShieldCheck, Edit3, LogOut, ArrowLeft } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {

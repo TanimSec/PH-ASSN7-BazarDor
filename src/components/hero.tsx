@@ -5,7 +5,7 @@ import { ArrowDown, CheckCircle2 } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="bg-gradient-to-b from-[#f3fbf4] to-[#fafcfa] border-b border-[#e2e8e2] py-10 md:py-16">
+    <section className="bg-linear-to-b from-[#f3fbf4] to-[#fafcfa] border-b border-[#e2e8e2] py-10 md:py-16">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           {/* Left Column: Text & CTA */}

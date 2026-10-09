@@ -46,9 +46,9 @@ export default function RootLayout({
               },
             }}
           />
-          <React.Suspense fallback={<div className="w-full h-24 bg-white border-b border-[#e2e8e2]" />}>
+          <Suspense fallback={<div className="w-full h-24 bg-white border-b border-[#e2e8e2]" />}>
             <Navbar />
-          </React.Suspense>
+          </Suspense>
           <main className="flex-1">{children}</main>
           <Footer />
         </AuthProvider>

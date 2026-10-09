@@ -16,11 +16,9 @@ export function Navbar() {
   const [tickerProducts, setTickerProducts] = useState<Product[]>([]);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [banglaDate, setBanglaDate] = useState("");
+  const [banglaDate] = useState(() => getBengaliDate());
 
   useEffect(() => {
-    setBanglaDate(getBengaliDate());
-
     async function loadNavData() {
       try {
         const [cats, prods] = await Promise.all([getCategories(), getProducts()]);
@@ -61,7 +59,7 @@ export function Navbar() {
                 <div className="w-7 h-7 rounded-full bg-[#05893e] text-white flex items-center justify-center text-xs font-bold">
                   {user.name ? user.name[0].toUpperCase() : "U"}
                 </div>
-                <span className="max-w-[120px] truncate">{user.name}</span>
+                <span className="max-w-30 truncate">{user.name}</span>
                 <ChevronDown className="w-4 h-4 text-gray-500" />
               </button>
 
